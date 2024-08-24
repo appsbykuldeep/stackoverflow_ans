@@ -1,0 +1,23 @@
+You got this error because you passing wrong value.
+
+
+    pageBuilder: (context, state) {
+                    /// Here you want state.extra must be null or UserAccount
+                    UserAccount? arguments = state.extra as UserAccount?;
+                    return slideTransition(
+                      context,
+                      state,
+                      ChatScreen(userAccount: arguments),
+                    );
+                  }, 
+
+
+
+    onPressed: () {
+              context.goNamed(
+                OtherProfilePageTestFuture.routeName + "_from_chat",
+                /// But here you sended uid which might be a string.
+                /// replace this line with extra: userAccount
+                extra: userAccount!.uid,
+              );
+            }
