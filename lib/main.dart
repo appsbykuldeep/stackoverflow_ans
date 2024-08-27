@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stackoverflow_ans/answers/questions_78909881/ans.dart';
 import 'package:stackoverflow_ans/classes/permission_class.dart';
+import 'package:stackoverflow_ans/isolate/isolate_test_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Questions78909881(),
+      home: const IsolateTestScreen(),
     );
   }
 }
