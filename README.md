@@ -4,7 +4,10 @@
 
 This guide provides best practices for maintaining clean code architecture, adhering to SOLID principles, and organizing the folder structure in a scalable, maintainable and testable Flutter project. It also includes examples to ensure consistency and ease of collaboration.
 
----
+
+<br>
+
+
 
 ## Table of Contents
 
@@ -13,7 +16,12 @@ This guide provides best practices for maintaining clean code architecture, adhe
 3. [Folder Structure](#folder-structure)
 4. [Naming Conventions](#naming-conventions)
 5. [Commenting Guidelines](#commenting-guidelines)
----
+
+
+<br>
+<br>
+<br>
+
 
 ## Clean Code Architecture
 
@@ -25,6 +33,12 @@ Clean architecture focuses on separating different responsibilities (UI, busines
 - **Loose Coupling**: Reduce dependencies between layers to allow flexibility and change.
 - **Testability**: Ensure each component can be tested in isolation.
 
+
+
+
+<br>
+<br>
+<br>
 
 
 ## SOLID Principles
@@ -283,6 +297,15 @@ Clean architecture focuses on separating different responsibilities (UI, busines
 
    ```
 
+
+
+<br>
+<br>
+<br>
+
+
+
+
 ## Folder Structure
 
 <!-- ```painttext ``` -->
@@ -441,6 +464,11 @@ Feature-specific directories that encapsulate all related files and functionalit
 The entry point of the Flutter application, where the app is initialized and run.
 
 
+<br>
+<br>
+<br>
+
+
 
 ## Naming Conventions
 
@@ -482,6 +510,14 @@ This document outlines the naming conventions to follow throughout the Flutter p
 - Avoid using special characters or capital letters.
 
 By adhering to these naming conventions, the codebase will remain consistent and understandable, facilitating easier collaboration among team members.
+
+
+
+
+<br>
+<br>
+<br>
+
 
 
 
