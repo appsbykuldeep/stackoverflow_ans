@@ -16,11 +16,13 @@ This guide provides best practices for maintaining clean code architecture, adhe
 3. [Folder Structure](#folder-structure)
 4. [Naming Conventions](#naming-conventions)
 5. [Commenting Guidelines](#commenting-guidelines)
+6. [Effective Code](#effective-code)
 
 
 <br>
 <br>
 <br>
+
 
 
 ## Clean Code Architecture
@@ -474,40 +476,110 @@ The entry point of the Flutter application, where the app is initialized and run
 
 This document outlines the naming conventions to follow throughout the Flutter project to ensure consistency, readability, and maintainability.
 
-### 1. Classes and Widgets
+### 1. UpperCamelCase
 
-- Use `PascalCase` for all class and widget names.
-- Each word should start with a capital letter, and there should be no spaces or underscores.
+- `Classes`, `enum` types, `typedef`, and `type` parameters should capitalize the first letter of each word (including the first word), and use no separators.
+```dart
+// Good
+class SliderMenu {...}
 
-### 2. Variables and Methods
+class HttpRequest {...}
 
-- Use `camelCase` for variable names and method names.
-- The first word should start with a lowercase letter, and each subsequent word should start with a capital letter.
+typedef Predicate<T> = bool Function(T value);
+```
 
-### 3. Constants
+```dart
+// Bad
+class sliderMenu {...}
 
-- Use `SCREAMING_SNAKE_CASE` for constant values.
-- All letters should be uppercase, with words separated by underscores.
+class httprequest {...}
 
-### 4. Files and Directories
+typedef predicate<T> = bool Function(T value);
+```
 
-- Use `kebab-case` for file and directory names.
-- All letters should be lowercase, with words separated by hyphens.
+### 2. lowerCamelCase
 
-### 5. Enums
+- Class `members`, top-level `definitions`, `variables` and `parameters` (named, positional etc) should capitalize the first letter of each word except the first word, and use no separators.
 
-- Use `PascalCase` for enum names and values.
-- Each value should be meaningful and reflect the purpose it serves.
+```dart
+// Good
+const pi = 3.14;
+const defaultTimeout = 1000;
+final urlScheme = RegExp('^([a-z]+):');
+
+class Dice {
+  static final numberGenerator = Random();
+}
+```
+
+```dart
+// Bad
+const PI = 3.14;
+const DefaultTimeout = 1000;
+final URL_SCHEME = RegExp('^([a-z]+):');
+
+class Dice {
+  static final NUMBER_GENERATOR = Random();
+}
+```
+
+### 3. lowercase_with_underscores
+
+- DO name `packages`, `directories`, and `files` using `lowercase_with_underscores`
+
+```dart
+// Good
+import 'dart:math' as math;
+import 'package:angular_components/angular_components.dart' as angular_components;
+import 'package:js/js.dart' as js;
+```
+
+
+
+```dart
+// Bad
+import 'dart:math' as Math;
+import 'package:angular_components/angular_components.dart' as angularComponents;
+import 'package:js/js.dart' as JS;
+```
+
+### 4. PREFER using _, __, etc. for unused callback parameters
+
+- Sometimes the type signature of a callback function requires a parameter, but the callback implementation doesn't use the parameter. In this case, it's idiomatic to name the unused parameter _. If the function has multiple unused parameters, use additional underscores to avoid name collisions: __, ___, etc.
+
+```dart
+// Good
+futureOfVoid.then((_) {
+  print('Operation complete.');
+});
+```
+
+```dart
+// Bad
+futureOfVoid.then((resultvalue) {
+  print('Operation complete.');
+});
+```
+
+
+### 5. DON'T use prefix letters
+
+```dart
+// Good
+defaultTimeout
+```
+
+```dart
+// Bad
+kDefaultTimeout
+```
 
 ### 6. Test Files
 
 - Append `.test.dart` to the name of test files.
-- Follow the same naming conventions as the files being tested, using `kebab-case`.
+- Follow the same naming conventions as the files being tested, using `lowercase_with_underscores`.
 
-### 7. Packages
 
-- Use `lowercase_with_underscores` for package names.
-- Avoid using special characters or capital letters.
 
 By adhering to these naming conventions, the codebase will remain consistent and understandable, facilitating easier collaboration among team members.
 
@@ -525,9 +597,9 @@ By adhering to these naming conventions, the codebase will remain consistent and
 
 Effective commenting is essential for maintaining and understanding the code. This project adopts two types of comments to clarify the intent and functionality of the code:
 
-### 1. Documentation Comments
+### 1. Documentation Comments `///`
 
-Documentation comments are used for providing comprehensive descriptions of classes, methods, and functions. These comments should explain:
+Documentation comments are used for providing comprehensive descriptions of `classes` , `methods`, and `functions`. These comments should explain:
 
 - The purpose of the class or method.
 - The parameters and return values.
@@ -555,14 +627,15 @@ class User {
 
   User({required this.name, required this.email});
 
+    /// Update profile picture
   void updateProfile(String newProfilePic) {
-    // Update profile picture
+     // Logic here
   }
 }
 ```
 
 
-### 2. Clarification Comments
+### 2. Clarification Comments `//`
 
 Clarification comments are shorter remarks used to provide general information, notes, or reminders about specific lines or sections of code. These comments might include:
 
@@ -585,3 +658,269 @@ if (user.isActive) {
 }
 
 ```
+
+### Note :
+
+- DON'T use block comments for documentation. You can use a block comment (`/* ... */`) to temporarily comment out a section of code, but all other comments should use `//`.
+```dart
+// Good
+
+void greet(String name) {
+  // Assume we have a valid name.
+  print('Hi, $name!');
+}
+
+```
+```dart
+// Bad
+
+void greet(String name) {
+  /* Assume we have a valid name. */
+  print('Hi, $name!');
+}
+
+```
+
+- DO separate the first sentence of a doc comment into its own paragraph.
+```dart
+// Good
+
+/// Deletes the file at [path].
+///
+/// Throws an [IOError] if the file could not be found. Throws a
+/// [PermissionError] if the file is present but could not be deleted.
+void delete(String path) {
+  ...
+}
+```
+```dart
+// Bad
+
+/// Deletes the file at [path]. Throws an [IOError] if the file could not
+/// be found. Throws a [PermissionError] if the file is present but could
+/// not be deleted.
+void delete(String path) {
+  ...
+}
+```
+
+- DON'T write documentation for both the `getter` and `setter` of a property.
+```dart
+// Good
+
+/// The pH level of the water in the pool.
+///
+/// Ranges from 0-14, representing acidic to basic, with 7 being neutral.
+int get phLevel => ...
+set phLevel(int level) => ...
+```
+```dart
+// Bad
+
+/// The depth of the water in the pool, in meters.
+int get waterDepth => ...
+
+/// Updates the water depth to a total of [meters] in height.
+set waterDepth(int meters) => ...
+```
+
+- DO put doc comments before metadata annotations.
+```dart
+// Good
+
+/// A button that can be flipped on and off.
+@Component(selector: 'toggle')
+class ToggleComponent {}
+```
+```dart
+// Bad
+
+@Component(selector: 'toggle')
+/// A button that can be flipped on and off.
+class ToggleComponent {}
+```
+
+- PREFER backtick fences for code blocks.
+```dart
+// Good
+
+/// You can use [CodeBlockExample] like this:
+///
+/// ```dart
+/// var example = CodeBlockExample();
+/// print(example.isItGreat); // "Yes."
+/// ```
+```
+```dart
+// Bad
+
+/// You can use [CodeBlockExample] like this:
+///
+///     var example = CodeBlockExample();
+///     print(example.isItGreat); // "Yes."
+```
+
+<br>
+<br>
+<br>
+
+
+## Effective Code
+
+- Use string interpolation instead of concatenation.
+```dart
+// Good
+
+'Hello, $name! You are ${year - birth} years old.';
+
+// use adjacent strings
+raiseAlarm('ERROR: Parts of the spaceship are on fire. Other '
+    'parts are overrun by martians. Unclear which are which.');
+
+```
+```dart
+// Bad
+
+'Hello, ' + name + '! You are ' + (year - birth).toString() + ' y...';
+
+
+
+raiseAlarm('ERROR: Parts of the spaceship are on fire. Other ' +
+    'parts are overrun by martians. Unclear which are which.');
+```
+
+- DO use collection `literals` when possible.
+```dart
+// Good
+
+var arguments = [
+  ...options,
+  command,
+  ...?modeFlags,
+  for (var path in filePaths)
+    if (path.endsWith('.dart')) path.replaceAll('.dart', '.js')
+];
+
+```
+```dart
+// Bad
+
+var arguments = <String>[];
+arguments.addAll(options);
+arguments.add(command);
+if (modeFlags != null) arguments.addAll(modeFlags);
+arguments.addAll(filePaths
+    .where((path) => path.endsWith('.dart'))
+    .map((path) => path.replaceAll('.dart', '.js')));
+```
+
+- DON'T use `.length` to see if a collection is empty.
+```dart
+// Good
+
+if (lunchBox.isEmpty) return 'so hungry...';
+if (words.isNotEmpty) return words.join(' ');
+```
+```dart
+// Bad
+
+if (lunchBox.length == 0) return 'so hungry...';
+if (!words.isEmpty) return words.join(' ');
+```
+
+- AVOID using `Iterable.forEach()` with a function literal
+.
+```dart
+// Good
+
+for (final person in people) {
+  ...
+}
+```
+```dart
+// Bad
+
+people.forEach((person) {
+  ...
+});
+```
+- DON'T use `async` when it has no useful effect
+.
+```dart
+// Good
+
+Future<int> fastestBranch(Future<int> left, Future<int> right) {
+  return Future.any([left, right]);
+}
+```
+```dart
+// Bad
+
+Future<int> fastestBranch(Future<int> left, Future<int> right) async {
+  return Future.any([left, right]);
+}
+```
+
+
+- DON'T use nested `if` `else` conditions. Use `guard` clauses to simplify code.
+
+```dart
+// Good: Using guard clauses
+
+
+String processOrder(Order order) {
+  if (order == null) {
+    return "Order is null.";
+  }
+
+  if (order.items == null || order.items.isEmpty) {
+    return "Order has no items.";
+  }
+
+  if (!order.isPaid) {
+    return "Order is not paid.";
+  }
+
+  if (order.isShipped) {
+    return "Order is already shipped.";
+  }
+
+  return "Order will be processed for shipping.";
+}
+
+```
+```dart
+// Bad: Nested if-else conditions
+
+
+String processOrder(Order order) {
+  if (order != null) {
+    if (order.items != null && order.items.isNotEmpty) {
+      if (order.isPaid) {
+        if (order.isShipped) {
+          return "Order is already shipped.";
+        } else {
+          return "Order will be processed for shipping.";
+        }
+      } else {
+        return "Order is not paid.";
+      }
+    } else {
+      return "Order has no items.";
+    }
+  } else {
+    return "Order is null.";
+  }
+}
+
+```
+
+
+<!-- ```dart
+// Good
+
+```
+```dart
+// Bad
+
+``` -->
