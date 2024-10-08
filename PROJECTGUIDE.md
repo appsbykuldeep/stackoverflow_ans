@@ -11,8 +11,8 @@ This guide provides best practices for maintaining clean code architecture, adhe
 
 ## Table of Contents
 
-1. [Clean Code Architecture](#clean-code-architecture)
-2. [SOLID Principles](#solid-principles)
+1. [SOLID Principles](#solid-principles)
+2. [Clean Code Architecture](#clean-code-architecture)
 3. [Folder Structure](#folder-structure)
 4. [Naming Conventions](#naming-conventions)
 5. [Commenting Guidelines](#commenting-guidelines)
@@ -25,22 +25,6 @@ This guide provides best practices for maintaining clean code architecture, adhe
 
 
 
-## Clean Code Architecture
-
-Clean architecture focuses on separating different responsibilities (UI, business logic, data access) into distinct layers to make the project more maintainable, testable, and scalable.
-
-### Key Concepts:
-
-- **Separation of Concerns**: Divide different functionalities into separate layers.
-- **Loose Coupling**: Reduce dependencies between layers to allow flexibility and change.
-- **Testability**: Ensure each component can be tested in isolation.
-
-
-
-
-<br>
-<br>
-<br>
 
 
 ## SOLID Principles
@@ -307,8 +291,27 @@ Clean architecture focuses on separating different responsibilities (UI, busines
 
 
 
+## Clean Code Architecture
+
+Clean architecture focuses on separating different responsibilities (UI, business logic, data access) into distinct layers to make the project more maintainable, testable, and scalable.
+
+### Key Concepts:
+
+- **Separation of Concerns**: Divide different functionalities into separate layers.
+- **Loose Coupling**: Reduce dependencies between layers to allow flexibility and change.
+- **Testability**: Ensure each component can be tested in isolation.
+
+
+
+
+<br>
+<br>
+<br>
+
+
 
 ## Folder Structure
+- Folder structure for `Clean Code Architecture` .
 
 <!-- ```painttext ``` -->
 
