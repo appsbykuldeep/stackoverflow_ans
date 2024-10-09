@@ -392,7 +392,9 @@ Clean architecture focuses on separating different responsibilities (UI, busines
     │       │   └── usecases/
     │       └── presentation/
     │           ├── screens/
+    │           │      └── dashboard_sreen.dart
     │           ├── utils/
+    │           │      └── dashboard_utils.dart
     │           └── widgets/
     │
     └── main.dart
