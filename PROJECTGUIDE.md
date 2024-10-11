@@ -319,10 +319,14 @@ Clean architecture focuses on separating different responsibilities (UI, busines
     lib/
     ├── common/
     │   ├── abstract_classes/
-    │   │   └── stateful_util.dart
+    │   │   ├── disposable.dart
+    │   │   ├── initializable.dart
+    │   │   └── screen_states.dart
     │   ├── classes/
     │   │   ├── adaptive_image_provider.dart
-    │   │   ├── permission_class.dart
+    │   │   └── time_laps.dart
+    │   ├── instances/
+    │   │   ├── permissions.dart
     │   │   └── play_store_appupdate.dart
     │   ├── utils/
     │   ├── dialogues/
@@ -393,8 +397,8 @@ Clean architecture focuses on separating different responsibilities (UI, busines
     │       └── presentation/
     │           ├── screens/
     │           │      └── dashboard_sreen.dart
-    │           ├── utils/
-    │           │      └── dashboard_utils.dart
+    │           ├── states/
+    │           │      └── dashboard_states.dart
     │           └── widgets/
     │
     └── main.dart
