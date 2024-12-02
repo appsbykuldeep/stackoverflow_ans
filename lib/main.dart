@@ -1,10 +1,12 @@
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:stackoverflow_ans/classes/permission_class.dart';
-import 'package:stackoverflow_ans/isolate/isolate_test_screen.dart';
+import 'package:stackoverflow_ans/features/android_alarm/presentation/screens/android_alarm_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppPermissions.checkInstallPackage();
+  await AndroidAlarmManager.initialize();
   runApp(const MyApp());
 }
 
@@ -35,7 +37,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const IsolateTestScreen(),
+      home: const AndroidAlarmScreen(),
+      // home: const IsolateTestScreen(),
     );
   }
 }
