@@ -2,20 +2,20 @@ import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:isolate';
 
-import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+// import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 class AndroidAlarmUtil {
   final helloAlarmID = 0;
   Future<void> startAlarm() async {
-    final status = await AndroidAlarmManager.periodic(
-        const Duration(minutes: 1), helloAlarmID, printHello);
-    dev.log("startAlarm :: $status :: $helloAlarmID");
+    // final status = await AndroidAlarmManager.periodic(
+    //     const Duration(minutes: 1), helloAlarmID, printHello);
+    // dev.log("startAlarm :: $status :: $helloAlarmID");
   }
 
   Future<void> stopAlarm() async {
-    final status = await AndroidAlarmManager.cancel(helloAlarmID);
-    dev.log("stopAlarm :: $status :: $helloAlarmID");
+    // final status = await AndroidAlarmManager.cancel(helloAlarmID);
+    // dev.log("stopAlarm :: $status :: $helloAlarmID");
   }
 
   Future<void> printTextFile() async {

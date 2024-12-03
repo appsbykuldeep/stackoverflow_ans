@@ -44,7 +44,7 @@ dependencies:
   firebase_ui_firestore: ^1.6.2
   esc_pos_utils_plus: ^2.0.3
   image: ^4.2.0
-  android_alarm_manager_plus: ^4.0.4
+  # android_alarm_manager_plus: ^4.0.4
 
 dev_dependencies:
   flutter_test:
